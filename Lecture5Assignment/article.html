@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>A Basic HTML5 Template</title>
+    <meta name="description" content="A simple HTML5 Template for new projects.">
+    <meta name="author" content="SitePoint">
+
+    <meta property="og:title" content="A Basic HTML5 Template">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.sitepoint.com/a-basic-html5-template/">
+    <meta property="og:description" content="A simple HTML5 Template for new projects.">
+    <meta property="og:image" content="image.png">
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="css_workshop.css?v=1.0">
+    <style>
+        .button {
+            background-color: white;
+        }
+    </style>
+    <script type = "text/javascript">
+           var imgObj = null;
+           
+           function init() {
+              imgObj = document.getElementById('myImage');
+              imgObj.style.position= 'relative'; 
+              imgObj.style.left = '0px'; 
+           }
+           function moveRight() {
+              imgObj.style.left = parseInt(imgObj.style.left) + 10 + 'px';
+           }
+           function changeColor(){
+                document.getElementById('submitBtn').style.backgroundColor = "green";
+           }
+           window.onload = init;
+     </script>
+</head>
+
+<body>
+    <form>
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" name="email"><br>
+        <button class="button" id="submitBtn" onmouseover="changeColor();">Subscribe</button>
+    </form>
+    <br>
+    <form>
+        <img id = "myImage" src = "arrow.jpg" />
+        <p>Click button below to move the image to right</p>
+        <input type = "button" value = "Click Me" onclick = "moveRight();" />
+     </form>      
+</body>
+
+</html>
