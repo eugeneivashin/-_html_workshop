@@ -1,0 +1,9 @@
+#paragraph1{
+    font-size: 120%;
+    text-shadow: 0px 1px 3px black;
+}
+img{
+    box-shadow: 0px 0px 5px 2px;
+    border: 2px solid;
+    border-radius: 5%;
+}
