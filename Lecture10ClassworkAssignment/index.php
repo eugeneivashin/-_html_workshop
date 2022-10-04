@@ -243,8 +243,27 @@ In addition, Sass includes a few built-in functions to help manipulate numbers. 
   <input type="text" id="email" name="email"><br>
   <input id="submitBtn" type="submit" value="Subscribe">
 </form>
+
 <script src="js/scripts.js"></script>
 <button id="anim">Event</button>
+
+<br> <br>
+<p>PHP Task</p>
+<form>
+  <label for="name">Name:</label><br>
+  <input type="text" id="name" name="name"><br>
+  <label for="surname">Surame:</label><br>
+  <input type="text" id="surname" name="surname"><br>
+  <label for="dateofbirth">Date Of Birth:</label><br>
+  <input type="date" id="dateofbirth" name="dateofbirth"><br>
+  <input id="submitBtn" type="submit" value="Submit">
+</form>
+<p><?php echo $_GET["name"]; 
+  echo "<br>";
+  echo $_GET["surname"];
+  echo "<br>";
+  echo $_GET["dateofbirth"]; ?></p>
+
 </body>
 </html>
 
