@@ -1,0 +1,118 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Chat App</title>
+    <meta name="description" content="A simple HTML5 Template for new projects.">
+    <meta name="author" content="Evgeniy Ivashin">
+
+    <meta property="og:title" content="ChatApp">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Chat application.">
+    <meta property="og:image" content="image.png">
+
+    <link rel="icon" type="image/x-icon" href="{% static 'chat.ico'%}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <main>
+        <div class="container-fluid">
+            <div class="row vh-100">
+                <div class="col-1 border border-dark" style="background-color: #001021;">
+                    <div class="d-flex flex-column ">
+                        <h1 class="align-self-center">Chats</h1>
+                        {% if chat_list %}
+                        {% for chat in chat_list %}
+                        <a href="{% url 'chat:openchat' chat.id %}" class="align-self-center">
+                            <button type="button" class="btn btn-primary rounded-5 mt-3">
+                                {{chat}}
+                            </button>
+                        </a>
+                        {% endfor %}
+                        {% endif %}
+                        <form action="{% url 'chat:newchat' %}" method="post" class="align-self-center">
+                            {% csrf_token %}
+                            <button name="newchatbtn" style="width: 2vw;" type="submit" class="btn btn-primary rounded-5 mt-2 ">+</button>
+                        </form>
+
+                    </div>
+                </div>
+                <div class="col-11" id="chatWindow" style="background-color:#11B5E4">
+                    {% if messages_list and chat_list %}
+                    <div class="d-flex flex-row mb-2 mt-2">
+                        {% for chat in chat_list %}
+                        {% if chat == current_chat %}
+                        <form class="align-self-center" action="{% url 'chat:changechatname' chat.id %}" method="post">
+                            {% csrf_token %}
+                            <h1 id="chatnameText" onclick=saveButton()> {{current_chat}}</h1>
+                            <input name="chatnameInput" id="chatnameInput" type="text" style="display: none;"
+                                value="{{ current_chat }}">
+                            <button name="saveBtn" id="saveBtn" type="submit" value="newChatname"
+                                class="btn btn-secondary rounded-4 ms-2" style="width: 5vw;height: 4vh;display: none;">
+                                <p>Save</p>
+                            </button>
+                        </form>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div class="d-flex flex-column pd-0 ms-0 rounded-3" style="background-color: #1481BA">
+                        <div style="height:84vh;" class="container-fluid pd-0 ms-0" >
+                            <div class="d-flex flex-column" >
+                                {% if messages_list %}
+                                {% for message in messages_list %}
+                                <div class="h5 mb-0">
+                                    <h5>{{message.sender}}</h5>
+                                </div>
+                                <div class="p-0 mt-0 mb-1 msg">
+                                    <p>{{message.message_text}}</p>
+                                </div>
+                                {%endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% if messages_list and chat_list %}
+                            <div class="container-fluid pt-3" style="background-color: #001021;">
+                                <form method="post" action="{% url 'chat:sendmessage' current_chat.id %}" >
+                                <div class="input-group mb-3">
+                                    {% csrf_token %}
+                                    <input name="sender" oninput="validateInputMsg()" value="" id="sender" type="text" class="form-control" placeholder="Sender" aria-label="Sender" aria-describedby="button-addon2">
+                                    <input name="message" oninput="validateInputMsg()" value="" id="message" type="text" class="form-control w-75" placeholder="Message" aria-label="Message" aria-describedby="button-addon2">
+                                    <button disabled id="chatsendbtn" class="btn btn-outline-secondary" type="submit" id="button-addon2" style="background-color: #0CAADC;"><p class="m-auto">Send</p></button>
+                                </div>
+                            </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+        integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'script.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+#chatMessages {
+height: 80%;
+}
+h5{
+    display: none;
+    position: relative;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.msg{
+    display: none;
+    position: relative;
+}
+p{
+    color: white;
+    font-family:'Courier New', Courier, monospace;
+}
+html{
+    font-size: 1rem;
+}
+h1{
+    color:white;
+}
